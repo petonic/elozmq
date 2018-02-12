@@ -1,9 +1,9 @@
 #
-# Dockerfile to build a Docker image for the ELS-HP server
-# running Ubuntu
+# Dockerfile to build a Docker image for the RPI clients
+# running Debian
 #
 
-FROM ubuntu
+FROM resin/rpi-raspbian
 MAINTAINER Mike Petonic <petonic@yahoo.com>
 
 # Update install catalog

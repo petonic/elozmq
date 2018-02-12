@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 #
+# This is designed to be run on the HP Ubuntu server
+# and as such, has its network interface as 'eno1'
+# below.  If running on RPI, please use 'eth0' instead.
+#
 # t1 -- send
 
 import time
@@ -14,7 +18,7 @@ if __name__ == "__main__":
     context = zmq.Context()
     socket = context.socket(zmq.PUB)
 
-    socket.bind("epgm://eth0;239.1.1.1:5000")
+    socket.bind("epgm://eno1;239.1.1.1:5000")
 
     while True:
         time.sleep(3)
