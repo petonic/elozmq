@@ -32,7 +32,7 @@ RUN apt-get install -y libsodium-dev
 # Install OpenPGM
 RUN apt-get install -y libpgm-5.2-0 libpgm-dev
 
-RUN cd /tmp && git clone --depth 1 --branch v4.2.3 git://github.com/zeromq/libzmq.git && cd libzmq && ./autogen.sh && ./configure --with-pgm && make && make install
+# RUN cd /tmp && git clone --depth 1 --branch v4.2.3 git://github.com/zeromq/libzmq.git && cd libzmq && ./autogen.sh && ./configure --with-pgm && make && make install
 
 ## Unpack tarball package
 #RUN tar xvzf zeromq-4.1.3.tar.gz
@@ -46,6 +46,9 @@ RUN apt-get install -y libtool pkg-config build-essential autoconf automake uuid
 #    ./configure --with-pgm && \
 #    make install && ldconfig
 
+COPY ../libzmq_v4.2.3 /tmp/libzmq
+RUN cd /tmp/libzmq && ./autogen.sh && ./configure --with-pgm && \
+    make && make install
 
 # Expected
 ############################################################
