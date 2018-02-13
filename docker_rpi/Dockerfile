@@ -6,9 +6,6 @@
 FROM resin/rpi-raspbian
 MAINTAINER Mike Petonic <petonic@yahoo.com>
 
-# Update install catalog
-RUN apt-get update
-
 # Install wget, joe, less
 RUN apt-get update && \
     apt-get -y install \
