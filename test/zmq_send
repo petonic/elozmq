@@ -9,16 +9,33 @@
 import time
 from random import choice
 from random import randrange
+import os
 
 import zmq
 
+arch_eth_d = {
+        'armv7l': 'eth0',
+        'x86_64': 'eno1',
+    }
+
 if __name__ == "__main__":
+    #
+    # Get the machine architecture that we're running on, and based
+    # on that, set the ethernet interface
+    #
+    try:
+        iface = arch_eth_d[os.uname().machine]
+        print('Using ethernet interface: {}'.format(repr(iface)))
+    except Exception as ex:
+        print('Error mapping uname().machine ({}) to eth interface: {}'.\
+              format(os.uname().machine, repr(ex)))
+
     stock_symbols = ['RAX', 'EMC', 'GOOG', 'AAPL', 'RHAT', 'AMZN']
 
     context = zmq.Context()
     socket = context.socket(zmq.PUB)
 
-    socket.bind("epgm://eno1;239.1.1.1:5000")
+    socket.bind("epgm://{};239.1.1.1:5000".format(iface))
 
     while True:
         time.sleep(3)
